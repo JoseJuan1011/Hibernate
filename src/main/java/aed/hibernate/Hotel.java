@@ -1,7 +1,12 @@
 package aed.hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name="hoteles")
 public class Hotel {
 	
+	@Id
 	private String codHotel;
 	private String nomHotel;
 	
