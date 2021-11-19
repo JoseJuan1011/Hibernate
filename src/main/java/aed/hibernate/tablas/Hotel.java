@@ -1,7 +1,12 @@
-package aed.hibernate;
+package aed.hibernate.tablas;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity(name="hoteles")
 //Poner @Table(name="nombre_tabla") para poner el nombre de la tabla de la base de datos.
@@ -10,8 +15,13 @@ public class Hotel {
 	@Id
 	//Poner @Column(name="nombreColumna") para el nombre de la columna en la base de datos.
 	//Poner @Transient para variables las cuales no se van a guardar en la base de datos.
+	
 	private String codHotel;
 	private String nomHotel;
+	
+	//FetchType.Eager para mostrar lista de habitaciones mediante la sentencia sql
+	@OneToMany(mappedBy="codHotel",fetch = FetchType.EAGER)
+	private List<Habitacion> habitaciones = new ArrayList<>();
 
 	public String getCodHotel() {
 		return codHotel;
@@ -24,6 +34,12 @@ public class Hotel {
 	}
 	public void setNomHotel(String nomHotel) {
 		this.nomHotel = nomHotel;
+	}
+	public List<Habitacion> getHabitaciones() {
+		return habitaciones;
+	}
+	public void setHabitaciones(List<Habitacion> habitaciones) {
+		this.habitaciones = habitaciones;
 	}
 	@Override
 	public String toString() {
