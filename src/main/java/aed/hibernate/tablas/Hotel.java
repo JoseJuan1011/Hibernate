@@ -12,10 +12,10 @@ import javax.persistence.OneToMany;
 //Poner @Table(name="nombre_tabla") para poner el nombre de la tabla de la base de datos.
 public class Hotel {
 	
-	@Id
+	
 	//Poner @Column(name="nombreColumna") para el nombre de la columna en la base de datos.
 	//Poner @Transient para variables las cuales no se van a guardar en la base de datos.
-	
+	@Id
 	private String codHotel;
 	private String nomHotel;
 	
@@ -23,6 +23,10 @@ public class Hotel {
 	@OneToMany(mappedBy="codHotel",fetch = FetchType.EAGER)
 	private List<Habitacion> habitaciones = new ArrayList<>();
 
+	public Hotel(String codHotel, int numHabitacion) {
+		setCodHotel(codHotel);
+		getHabitaciones().add(new Habitacion(codHotel,numHabitacion));
+	}
 	public String getCodHotel() {
 		return codHotel;
 	}

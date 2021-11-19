@@ -2,21 +2,20 @@ package aed.hibernate.tablas;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity(name="habitaciones")
 public class Habitacion implements Serializable {
 	
-	@Id
+	@EmbeddedId
+	HabitacionPK habitacionPK = new HabitacionPK();
+	
+	@MapsId(value = "habitacionPK.codHotel")
 	@ManyToOne
 	private Hotel codHotel;
-	
-	@Id
-	@Column(name="numHabitacion")
-	private int numeroHabitacion;
 	
 	private int capacidad;
 	
@@ -28,22 +27,19 @@ public class Habitacion implements Serializable {
 		
 	}
 
-	public Hotel getCodHotel() {
-		return codHotel;
+	public Habitacion(String codHotel, int numHabitacion) {
+		getHabitacionPK().setCodHotel(codHotel);
+		getHabitacionPK().setNumHabitacion(numHabitacion);
 	}
 
-	public void setCodHotel(Hotel codHotel) {
-		this.codHotel = codHotel;
+	public HabitacionPK getHabitacionPK() {
+		return habitacionPK;
 	}
 
-	public int getNumeroHabitacion() {
-		return numeroHabitacion;
+	public void setHabitacionPK(HabitacionPK habitacionPK) {
+		this.habitacionPK = habitacionPK;
 	}
-
-	public void setNumeroHabitacion(int numeroHabitacion) {
-		this.numeroHabitacion = numeroHabitacion;
-	}
-
+	
 	public int getCapacidad() {
 		return capacidad;
 	}
@@ -66,5 +62,11 @@ public class Habitacion implements Serializable {
 
 	public void setActiva(int activa) {
 		this.activa = activa;
+	}
+
+	@Override
+	public String toString() {
+		return "Habitacion [habitacionPK=" + habitacionPK + ", codHotel=" + codHotel + ", capacidad=" + capacidad
+				+ ", preciodia=" + preciodia + ", activa=" + activa + "]";
 	}
 }
