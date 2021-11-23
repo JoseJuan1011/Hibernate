@@ -3,22 +3,36 @@ package aed.hibernate.tablas;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Embeddable
 public class HabitacionPK implements Serializable {
-	private String codHotel;
+
+	private int codHabitacion;
+	
+	@ManyToOne
+	@JoinColumn(name="codHotel")
+	private Hotel codHotel;
 	
 	private int numHabitacion;
 	
-	public HabitacionPK () {
-		
+	public HabitacionPK() {
+		setCodHotel(null);
+		setNumHabitacion(0);
+	}
+	
+	public HabitacionPK(Hotel codHotel, int numHabitacion) {
+		this.codHotel = codHotel;
+		this.numHabitacion = numHabitacion;
 	}
 
-	public String getCodHotel() {
+	public Hotel getCodHotel() {
 		return codHotel;
 	}
 
-	public void setCodHotel(String codHotel) {
+	public void setCodHotel(Hotel codHotel) {
 		this.codHotel = codHotel;
 	}
 

@@ -3,6 +3,7 @@ package aed.hibernate.tablas.trials;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Cache;
@@ -18,6 +19,7 @@ public class Laptop {
 	private String brand;
 	private int price;
 	@ManyToOne
+	@JoinColumn(name="rollid")
 	private Student student;
 	
 	public Laptop() {
