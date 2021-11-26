@@ -116,4 +116,11 @@ public class Estancia {
 	public void setPagado(int pagado) {
 		this.pagado = pagado;
 	}
+
+	@Override
+	public String toString() {
+		return "Estancia [codEstancia=" + codEstancia + ", coddnionie=" + coddnionie + ", habitacion=" + habitacion
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", codRegimen=" + codRegimen
+				+ ", ocupantes=" + ocupantes + ", precioestancia=" + precioestancia + ", pagado=" + pagado + "]";
+	}
 }

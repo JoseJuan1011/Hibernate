@@ -58,4 +58,10 @@ public class Cliente {
 	public void setEstancias(List<Estancia> estancias) {
 		this.estancias = estancias;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [coddnionie=" + coddnionie + ", nombre=" + nombre + ", nacionalidad=" + nacionalidad
+				+ "]";
+	}
 }

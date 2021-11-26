@@ -3,6 +3,7 @@ package aed.hibernate;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -65,18 +66,31 @@ public class App {
 		
 		//Para guardar en base de datos utilizar session.save(Hotel)
 		//Para obtener datos a Objeto sería session.get(object.class,id)
-
-		Query q = session1.createQuery("from habitaciones");
-		List<Habitacion> habitaciones = q.list();
 		
-		for(Habitacion h : habitaciones) {
-			System.out.println(h);
+//		Hotel hotel = session1.get(Hotel.class,"111111");
+//		System.out.println(hotel);
+
+		//Recordar poner codHotel.codHotel para habitaciones debido a la relación ManyToOne, en esquema: codHotel(campo habitaciones).codHotel(campo Hoteles) 
+//		Query q = session1.createQuery("select codHabitacion,codHotel.codHotel,numHabitacion,capacidad,preciodia,activa from habitaciones");
+		Query q = session1.createQuery("from habitaciones");
+		//q.list() para varios registros
+		//q.uniqueResult() para registro único
+		List<Habitacion> habitaciones = (List<Habitacion>) q.list();
+		
+		for (Habitacion habitacion : habitaciones) {
+			System.out.println(habitacion);
+			for (Estancia estancia : habitacion.getEstancias()) {
+				System.out.println("\r"+estancia);
+			}
+			System.out.println("");
 		}
 		
-		tx1.commit();
+		
+		
+//		tx1.commit();
 		session1.close();
 		sf.close();
-		reg.close();
+//		reg.close();
 	}
 
 }

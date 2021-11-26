@@ -69,4 +69,10 @@ public class Regimen {
 	public void setEstancias(List<Estancia> estancias) {
 		this.estancias = estancias;
 	}
+
+	@Override
+	public String toString() {
+		return "Regimen [codRegimen=" + codRegimen + ", codHotel=" + codHotel + ", tipo=" + tipo + ", precio=" + precio
+				+ "]";
+	}
 }

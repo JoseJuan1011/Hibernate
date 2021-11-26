@@ -15,10 +15,6 @@ public class Observacion {
 		
 	}
 	
-	public Observacion(Habitacion habitacion, String observaciones) {
-		
-	}
-	
 	public ObservacionPK getObservacionPK() {
 		return observacionPK;
 	}

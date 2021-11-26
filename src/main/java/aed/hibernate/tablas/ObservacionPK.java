@@ -14,7 +14,11 @@ public class ObservacionPK implements Serializable {
 	private Habitacion habitacion;
 
 	public ObservacionPK() {
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+	public ObservacionPK(Habitacion habitacion) {
+		setHabitacion(habitacion);
 	}
 
 	public Habitacion getHabitacion() {
