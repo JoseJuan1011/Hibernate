@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+@SuppressWarnings("serial")
 @Embeddable
 public class ObservacionPK implements Serializable {
 

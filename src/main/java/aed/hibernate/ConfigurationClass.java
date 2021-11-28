@@ -43,10 +43,17 @@ public class ConfigurationClass {
 	
 	public void closeConfiguration() {
 		tx1.commit();
-		session.close();
 		sf.close();
 	}
 	
+	public Transaction getTx1() {
+		return tx1;
+	}
+
+	public void setTx1(Transaction tx1) {
+		this.tx1 = tx1;
+	}
+
 	public Session getSession() {
 		return session;
 	}

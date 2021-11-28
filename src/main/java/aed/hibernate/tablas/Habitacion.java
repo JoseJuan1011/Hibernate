@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@SuppressWarnings("serial")
 @Entity(name = "habitaciones")
 public class Habitacion implements Serializable {
 
@@ -126,6 +125,6 @@ public class Habitacion implements Serializable {
 	@Override
 	public String toString() {
 		return "Habitacion [codHabitacion=" + codHabitacion + ", codHotel=" + codHotel + ", numHabitacion="
-				+ numHabitacion + ", capacidad=" + capacidad + ", preciodia=" + preciodia + ", activa=" + activa + (Objects.isNull(observacion) ? "" : "observaciones: "+observacion.getObservaciones()) + "]";
+				+ numHabitacion + ", capacidad=" + capacidad + ", preciodia=" + preciodia + ", activa=" + activa + ", " + (Objects.isNull(observacion) ? "" : "observaciones: "+observacion.getObservaciones()) + "]";
 	}
 }

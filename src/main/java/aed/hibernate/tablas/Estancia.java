@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "estancias")
@@ -20,10 +19,7 @@ public class Estancia {
 	private Cliente coddnionie;
 	
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "codHotel", referencedColumnName = "codHotel"),
-		@JoinColumn(name = "numHabitacion", referencedColumnName = "numHabitacion")
-	})
+	@JoinColumn(name = "codHabitacion", referencedColumnName = "codHabitacion")
 	private Habitacion habitacion;
 	
 	private Date fechaInicio;
