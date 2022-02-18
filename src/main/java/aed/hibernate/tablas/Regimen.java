@@ -3,7 +3,10 @@ package aed.hibernate.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,17 +16,20 @@ import javax.persistence.OneToMany;
 public class Regimen {
 
 	@Id
+	@Column(name="codRegimen", columnDefinition = "int(11)")
 	private int codRegimen;
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinColumn(name="codHotel")
 	private Hotel codHotel;
 	
+	@Column(name = "tipo", columnDefinition = "char(2)")
 	private String tipo;
 	
-	private int precio;
+	@Column(name = "preciodia", columnDefinition = "int(11)")
+	private int preciodia;
 	
-	@OneToMany(mappedBy = "codRegimen")
+	@OneToMany(mappedBy = "codRegimen", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Estancia> estancias = new ArrayList<>();
 	
 	public Regimen() {
@@ -53,13 +59,13 @@ public class Regimen {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
-	public int getPrecio() {
-		return precio;
+	
+	public int getPreciodia() {
+		return preciodia;
 	}
 
-	public void setPrecio(int precio) {
-		this.precio = precio;
+	public void setPreciodia(int preciodia) {
+		this.preciodia = preciodia;
 	}
 
 	public List<Estancia> getEstancias() {
@@ -72,7 +78,7 @@ public class Regimen {
 
 	@Override
 	public String toString() {
-		return "Regimen [codRegimen=" + codRegimen + ", codHotel=" + codHotel + ", tipo=" + tipo + ", precio=" + precio
+		return "Regimen [codRegimen=" + codRegimen + ", codHotel=" + codHotel + ", tipo=" + tipo + ", preciodia=" + preciodia
 				+ "]";
 	}
 }

@@ -2,8 +2,10 @@ package aed.hibernate.tablas;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,29 +14,34 @@ import javax.persistence.ManyToOne;
 public class Estancia {
 
 	@Id
+	@Column(name = "codEstancia", columnDefinition = "int(11)")
 	private int codEstancia;
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinColumn(name="coddnionie", referencedColumnName = "coddnionie")
 	private Cliente coddnionie;
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "codHabitacion", referencedColumnName = "codHabitacion")
 	private Habitacion habitacion;
 	
+	@Column(name = "fechaInicio", columnDefinition = "date")
 	private Date fechaInicio;
 	
+	@Column(name = "fechaFin", columnDefinition = "date")
 	private Date fechaFin;
 	
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinColumn(name="codRegimen")
 	private Regimen codRegimen;
 	
+	@Column(name = "ocupantes", columnDefinition = "smallint(6)")
 	private int ocupantes;
 	
+	@Column(name = "precioestancia", columnDefinition = "int(11)")
 	private int precioestancia;
 	
-	@Column(length = 1)
+	@Column(name = "pagado", columnDefinition = "tinyint(1)")
 	private int pagado;
 	
 	public Estancia() {

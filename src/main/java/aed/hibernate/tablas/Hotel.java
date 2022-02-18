@@ -3,6 +3,8 @@ package aed.hibernate.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -17,15 +19,17 @@ public class Hotel {
 	// Poner @Transient para variables las cuales no se van a guardar en la base de
 	// datos.
 	@Id
+	@Column(name = "codHotel", columnDefinition = "char(6)")
 	private String codHotel;
 
+	@Column(name = "nombreHotel", columnDefinition = "varchar(60)")
 	private String nomHotel;
 
 	// FetchType.Eager para mostrar lista de habitaciones mediante la sentencia sql
-	@OneToMany(mappedBy = "codHotel", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "codHotel", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Habitacion> habitaciones = new ArrayList<>();
 
-	@OneToMany(mappedBy = "codHotel", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "codHotel", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Regimen> regimenes = new ArrayList<>();
 
 	public Hotel() {

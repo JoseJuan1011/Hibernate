@@ -1,42 +1,46 @@
 package aed.hibernate.tablas;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@SuppressWarnings("serial")
 @Entity(name = "habitaciones")
-public class Habitacion implements Serializable {
+public class Habitacion {
 
 	@Id
+	@Column(name = "codHabitacion", columnDefinition = "int(11)")
 	private int codHabitacion;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "codHotel")
 	private Hotel codHotel;
 
+	@Column(name = "numHabitacion", columnDefinition = "char(4)")
 	private int numHabitacion;
 
+	@Column(name = "capacidad", columnDefinition = "smallint(6)")
 	private int capacidad;
 
+	@Column(name = "preciodia", columnDefinition = "int(11)")
 	private int preciodia;
 
-	@Column(length = 1)
+	@Column(name = "activa", columnDefinition = "tinyint(1)")
 	private int activa;
 
-	@OneToMany(mappedBy = "habitacion", targetEntity = Estancia.class)
+	@OneToMany(mappedBy = "habitacion", targetEntity = Estancia.class, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Estancia> estancias = new ArrayList<Estancia>();
 
-	@OneToOne(mappedBy = "observacionPK.habitacion")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "habitacion")
 	private Observacion observacion;
 
 	public Habitacion() {

@@ -3,6 +3,7 @@ package aed.hibernate.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,19 +14,17 @@ import javax.persistence.OneToMany;
 public class Cliente {
 
 	@Id
-	@Column(length = 9)
+	@Column(name = "coddnionie", columnDefinition = "char(9)")
 	private String coddnionie;
 
+	@Column(name = "nombre", columnDefinition = "varchar(50)")
 	private String nombre;
 
+	@Column(name = "nacionalidad", columnDefinition = "varchar(40)")
 	private String nacionalidad;
 
-	@OneToMany(mappedBy = "coddnionie", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "coddnionie", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private List<Estancia> estancias = new ArrayList<>();
-
-	public Cliente() {
-
-	}
 
 	public String getCoddnionie() {
 		return coddnionie;
